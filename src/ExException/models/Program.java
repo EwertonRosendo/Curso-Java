@@ -31,10 +31,21 @@ public class Program {
             Account account = new Account(number, holder, balance, withdrawlimit);
 
             System.out.println(account);
+
+            System.out.println("Enter amount for withdraw: ");
+            Double withdraw = sc.nextDouble();
+
+            account.withdraw(withdraw);
+
+            System.out.println("New Balance");
+            System.out.println(account);
         }
 
         catch (InputMismatchException e)  {
             System.out.println("Valor inserido não corresponde com o esperado!");
+        }
+        catch (ValueException e){
+            System.out.println(e.getMessage());
         }
 
     }

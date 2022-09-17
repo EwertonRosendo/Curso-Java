@@ -47,9 +47,11 @@ public class Account {
         }
     }
 
-    public void withdraw(Double value) throws ValueException{
-        if(value > withdrawLimit){
-            balance -= value;
+    public void withdraw(Double value) throws ValueException {
+        if(value < withdrawLimit){
+            balance  = balance - value;
+        } else {
+            throw new ValueException("Valor informado não corresponde");
         }
     }
 
