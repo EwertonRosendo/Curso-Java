@@ -2,8 +2,8 @@ package heranca2.entities;
 
 public class Account {
 
-    private Integer number;
-    private String holder;
+    public Integer number;
+    public String holder;
     protected Double balance;
 
     public Account(){

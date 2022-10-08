@@ -29,4 +29,6 @@ public class Rectangle implements Shape{
     public double totalArea() {
         return altura*largura;
     }
+
+
 }
