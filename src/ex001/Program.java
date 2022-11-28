@@ -31,8 +31,6 @@ public class Program {
         System.out.println("Enter order data: ");
         System.out.println("Status: ");
         OrderStatus status = OrderStatus.valueOf(sc.next());
-
-
         System.out.println("how many itens to this order? ");
 
 

@@ -6,10 +6,11 @@ import java.util.Date;
 public class Client {
 
     private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    private String name;
-    private String email;
-    private Date birthDate;
+    protected String name;
+    public String email;
+    public Date birthDate;
 
+    private Double salario;
 
     public Client(){
 
