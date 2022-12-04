@@ -46,6 +46,7 @@ public class ArvoreAVL {
             System.out.println("");
             System.out.println("");
             System.out.println("");
+            // PERFEITO
         }
     }
 
