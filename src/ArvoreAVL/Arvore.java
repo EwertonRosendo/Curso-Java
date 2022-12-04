@@ -7,6 +7,61 @@ public class Arvore {
     public Arvore(No noraiz) {
         this.noraiz = noraiz;
     }
+    public class No {
+
+        private int altura = 1;
+        private int valor;
+        private No noPai;
+        private No noEsquerda;
+        private No noDireita;
+
+        No(No noPai, int valor) {
+            this.valor = valor;
+            this.noPai = noPai;
+            this.noEsquerda = null;
+            this.noDireita = null;
+        }
+
+        public int getValor() {
+            return valor;
+        }
+
+        public void setValor(int valor) {
+            this.valor = valor;
+        }
+
+        public No getNoPai() {
+            return noPai;
+        }
+
+        public void setNoPai(No noPai) {
+            this.noPai = noPai;
+        }
+
+        public No getNoEsquerda() {
+            return noEsquerda;
+        }
+
+        public void setNoEsquerda(No noEsquerda) {
+            this.noEsquerda = noEsquerda;
+        }
+
+        public No getNoDireita() {
+            return noDireita;
+        }
+
+        public void setNoDireita(No noDireita) {
+            this.noDireita = noDireita;
+        }
+
+        public No(int valor, No noPai, No noEsquerda, No noDireita) {
+            this.valor = valor;
+            this.noPai = noPai;
+            this.noEsquerda = noEsquerda;
+            this.noDireita = noDireita;
+        }
+
+    }
 
     public boolean isEmpty() {
         if (noraiz == null) {
@@ -43,9 +98,13 @@ public class Arvore {
         inserir(this.noraiz, valor);
     }
 
-    public void inserir(No node, int valor) {
+    private int altura(No no) {
+        if (no == null)
+            return 0;
+        return no.altura;
+    }
+    public No inserir(No node, int valor) {
 
-        //alterar o m�todo para uma �rvore AVL
         if (this.noraiz == null) {
             this.noraiz = new No(null, valor);
         } else {
@@ -66,7 +125,91 @@ public class Arvore {
                     node.setNoDireita(new No(node, valor));
                 }
             }
+
         }
+
+        node.altura = Math.max(altura(node.noEsquerda), altura(node.noDireita)) + 1;
+
+        int balance = getBalance(node);
+
+        if (balance > 1 && valor < node.noEsquerda.valor){
+            return rightRotate(node);
+        }
+
+
+        // Right Right Case
+        if (balance < -1 && valor > node.noDireita.valor)
+            return leftRotate(node);
+
+        // Left Right Case
+        if (balance > 1 && valor > node.noEsquerda.valor)
+        {
+            node.noEsquerda =  leftRotate(node.noEsquerda);
+            return rightRotate(node);
+        }
+
+        // Right Left Case
+        if (balance < -1 && valor < node.noDireita.valor)
+        {
+            node.noDireita = rightRotate(node.noDireita);
+            return leftRotate(node);
+        }
+
+        return node;
+    }
+    private No rightRotate(No y) {
+        No x = y.noEsquerda;
+        No T2 = x.noDireita;
+
+        // Perform rotation
+        x.noDireita = y;
+        y.noEsquerda = T2;
+
+        // Update alturas
+        y.altura = Math.max(altura(y.noEsquerda), altura(y.noDireita))+1;
+        x.altura = Math.max(altura(x.noEsquerda), altura(x.noDireita))+1;
+
+        // Return new node
+        return x;
+    }
+
+    public void preOrder(No node) {
+        if (node != null) {
+            preOrder(node.noEsquerda);
+            System.out.printf("%d ", node.valor);
+            preOrder(node.noDireita);
+        }
+    }
+
+    private No minValueNode(No node) {
+        No current = node;
+        /* loop down to find the leftmost leaf */
+        while (current.noEsquerda != null)
+            current = current.noEsquerda;
+        return current;
+    }
+
+    private No leftRotate(No x) {
+        No y = x.noDireita;
+        No T2 = y.noEsquerda;
+
+        // Perform rotation
+        y.noEsquerda = x;
+        x.noDireita = T2;
+
+        //  Update alturas
+        x.altura = Math.max(altura(x.noEsquerda), altura(x.noDireita))+1;
+        y.altura = Math.max(altura(y.noEsquerda), altura(y.noDireita))+1;
+
+        // Return new node
+        return y;
+    }
+
+    // Get Balance factor of node N
+    private int getBalance(No N) {
+        if (N == null)
+            return 0;
+        return altura(N.noEsquerda) - altura(N.noDireita);
     }
 
     public No remover(int valor) throws Exception {
@@ -75,8 +218,6 @@ public class Arvore {
 
     private No remover(No node, int valor) {
 
-        //alterar o m�todo para uma �rvore AVL
-        
         if (this.noraiz == null) {
             System.out.println("�rvore vazia");
         } else {
@@ -93,8 +234,38 @@ public class Arvore {
                 System.out.println("  Removeu No " + node.getValor());
                 node = (node.getNoEsquerda() != null) ? node.getNoEsquerda() : node.getNoDireita();
             }
+            if (node == null)
+                return node;
 
+            node.altura = Math.max(altura(node.noEsquerda), altura(node.noDireita)) + 1;
+
+            // STEP 3: GET THE BALANCE FACTOR OF THIS NODE (to check whether
+            //  this node became unbalanced)
+            int balance = getBalance(node);
+
+            // If this node becomes unbalanced, then there are 4 cases
+
+            // Left Left Case
+            if (balance > 1 && getBalance(node.noEsquerda) >= 0)
+                return rightRotate(node);
+
+            // Left Right Case
+            if (balance > 1 && getBalance(node.noEsquerda) < 0) {
+                node.noEsquerda =  leftRotate(node.noEsquerda);
+                return rightRotate(node);
+            }
+
+            // Right Right Case
+            if (balance < -1 && getBalance(node.noDireita) <= 0)
+                return leftRotate(node);
+
+            // Right Left Case
+            if (balance < -1 && getBalance(node.noDireita) > 0) {
+                node.noDireita = rightRotate(node.noDireita);
+                return leftRotate(node);
+            }
         }
+
         return node;
     }
 

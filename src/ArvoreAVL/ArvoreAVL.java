@@ -24,7 +24,7 @@ public class ArvoreAVL {
                     objArvoreAVL.inserir(valor);
                     break;
                 case 2:
-                    //REMOVER
+                    //REMOVER1
                     System.out.print("Informe o Valor: ");
                     valor = ler.nextInt();
                     objArvoreAVL.remover(valor);
