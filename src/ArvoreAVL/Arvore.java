@@ -1,4 +1,4 @@
-package arvoreavl;
+package ArvoreAVL;
 
 public class Arvore {
 
@@ -17,7 +17,7 @@ public class Arvore {
 
     public void imprimirArvore() {
         if (this.noraiz == null) {
-            System.out.println("Árvore vazia");
+            System.out.println("ï¿½rvore vazia");
         } else {
             imprimirArvore(this.noraiz);
         }
@@ -32,8 +32,8 @@ public class Arvore {
         }
         System.out.print(node.getValor() + "-");
         try {
-            System.out.println("NóEsquerda: " + node.getNoEsquerda().getValor());
-            System.out.println("NóDireita: " + node.getNoDireita().getValor());
+            System.out.println("Nï¿½Esquerda: " + node.getNoEsquerda().getValor());
+            System.out.println("Nï¿½Direita: " + node.getNoDireita().getValor());
         } catch (NullPointerException e) {
             e.getStackTrace();
         }
@@ -45,7 +45,7 @@ public class Arvore {
 
     public void inserir(No node, int valor) {
 
-        //alterar o método para uma árvore AVL
+        //alterar o mï¿½todo para uma ï¿½rvore AVL
         if (this.noraiz == null) {
             this.noraiz = new No(null, valor);
         } else {
@@ -56,7 +56,7 @@ public class Arvore {
                     //Se nodo esquerdo vazio insere o novo no aqui 
                     node.setNoEsquerda(new No(node, valor));
                 }
-                //Verifica se o valor a ser inserido é maior que o no corrente da árvore, se sim vai para subarvore direita 
+                //Verifica se o valor a ser inserido ï¿½ maior que o no corrente da ï¿½rvore, se sim vai para subarvore direita 
             } else if (valor > node.getValor()) {
                 //Se tiver elemento no no direito continua a busca 
                 if (node.getNoDireita() != null) {
@@ -75,10 +75,10 @@ public class Arvore {
 
     private No remover(No node, int valor) {
 
-        //alterar o método para uma árvore AVL
+        //alterar o mï¿½todo para uma ï¿½rvore AVL
         
         if (this.noraiz == null) {
-            System.out.println("Árvore vazia");
+            System.out.println("ï¿½rvore vazia");
         } else {
             if (valor < node.getValor()) {
                 node.setNoEsquerda(remover(node.getNoEsquerda(), valor));

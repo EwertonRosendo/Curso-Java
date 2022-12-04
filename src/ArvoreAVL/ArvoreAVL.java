@@ -1,4 +1,4 @@
-package arvoreavl;
+package ArvoreAVL;
 import java.util.Scanner;
 public class ArvoreAVL {
 
@@ -9,12 +9,12 @@ public class ArvoreAVL {
         int valor;
         while (opc != 4) {
             System.out.println("#### ARVORE AVL ####");
-            System.out.println("1 - Inserir Nó");
-            System.out.println("2 - Remover Nó");
-            System.out.println("3 - Imprimir Árvore");
+            System.out.println("1 - Inserir Nï¿½");
+            System.out.println("2 - Remover Nï¿½");
+            System.out.println("3 - Imprimir ï¿½rvore");
             System.out.println("4 - Sair");
             System.out.println("");
-            System.out.print("Informe a opção desejada: ");
+            System.out.print("Informe a opï¿½ï¿½o desejada: ");
             opc = ler.nextInt();
             switch (opc) {
                 case 1:
@@ -37,7 +37,7 @@ public class ArvoreAVL {
                     System.out.println("Sair");
                     break;
                 default:
-                    System.out.println("Opção inválida!");
+                    System.out.println("Opï¿½ï¿½o invï¿½lida!");
                     break;
             }
             System.out.println("");
