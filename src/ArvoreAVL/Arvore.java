@@ -5,22 +5,22 @@ import java.util.*;
 
 public class Arvore {
     public class Node {
-        private Node left, right, parent;
-        private int height = 1;
-        private int value;
+        public Node left, right, parent;
+        public int height = 1;
+        public int value;
 
-        private Node(int val) {
+        public Node(int val) {
             this.value = val;
         }
     }
 
-    private int height(Node N) {
+    public int height(Node N) {
         if (N == null)
             return 0;
         return N.height;
     }
 
-    private Node insert(Node node, int value) {
+    public Node insert(Node node, int value) {
         /* 1.  Perform the normal BST rotation */
         if (node == null) {
             return (new Node(value));
@@ -64,7 +64,7 @@ public class Arvore {
         return node;
     }
 
-    private Node rightRotate(Node y) {
+    public Node rightRotate(Node y) {
         Node x = y.left;
         Node T2 = x.right;
 
@@ -80,7 +80,7 @@ public class Arvore {
         return x;
     }
 
-    private Node leftRotate(Node x) {
+    public Node leftRotate(Node x) {
         Node y = x.right;
         Node T2 = y.left;
 
@@ -97,7 +97,7 @@ public class Arvore {
     }
 
     // Get Balance factor of node N
-    private int getBalance(Node N) {
+    public int getBalance(Node N) {
         if (N == null)
             return 0;
         return height(N.left) - height(N.right);
@@ -111,7 +111,7 @@ public class Arvore {
         }
     }
 
-    private Node minValueNode(Node node) {
+    public Node minValueNode(Node node) {
         Node current = node;
         /* loop down to find the leftmost leaf */
         while (current.left != null)
@@ -119,7 +119,7 @@ public class Arvore {
         return current;
     }
 
-    private Node deleteNode(Node root, int value) {
+    public Node deleteNode(Node root, int value) {
         // STEP 1: PERFORM STANDARD BST DELETE
 
         if (root == null)
@@ -204,7 +204,7 @@ public class Arvore {
         return root;
     }
 
-    private void imprimirArvore(Node node) {
+    public void imprimirArvore(Node node) {
         if (node.left != null) {
             imprimirArvore(node.left);
         }

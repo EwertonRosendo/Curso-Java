@@ -1,10 +1,12 @@
 package ArvoreAVL;
+
 import java.util.Scanner;
 public class ArvoreAVL {
 
     public static void main(String[] args) throws Exception {
         Scanner ler = new Scanner(System.in);
-        Arvore objArvoreAVL = new Arvore(null);
+        Arvore t = new Arvore();
+        Arvore.Node root = null;
         int opc = 0;
         int valor;
         while (opc != 4) {
@@ -21,17 +23,18 @@ public class ArvoreAVL {
                     //INSERIR
                     System.out.print("Informe o Valor: ");
                     valor = ler.nextInt();
-                    objArvoreAVL.inserir(valor);
+                    root = t.insert(root, valor);
+
                     break;
                 case 2:
                     //REMOVER
                     System.out.print("Informe o Valor: ");
                     valor = ler.nextInt();
-                    objArvoreAVL.remover(valor);
+                    root = t.deleteNode(root, valor);
                     break;
                 case 3:
                     //IMPRIMIR
-                    objArvoreAVL.imprimirArvore();
+                    t.imprimirArvore(root);
                     break;
                 case 4:
                     System.out.println("Sair");
