@@ -1,14 +1,15 @@
 package heranca2.entities;
 
-public class Account {
+public  class Account {
 
-    public Integer number;
-    public String holder;
+    private Integer number;
+    private String holder;
     protected Double balance;
 
     public Account(){
 
     }
+
 
     public Account(Integer number, String holder, Double balance) {
         this.number = number;
